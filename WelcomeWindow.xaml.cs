@@ -61,5 +61,39 @@ namespace CinemaApp
                 MessageBox.Show("Invalid login credentials.");
             }
         }
+
+        private void handleSignUpClick(object sender, RoutedEventArgs e)
+        {
+            string username = txtUsername.Text;
+            string password = txtPassword.Password.ToString();
+
+            if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("Invalid data");
+                return;
+            }
+
+            bool usernameExists = context.Users.Any(u => u.Username == username);
+
+            if (usernameExists)
+            {
+                MessageBox.Show("User with this username already exists.");
+                return;
+            }
+
+            if (password.Length < 8)
+            {
+                MessageBox.Show("Password length must be > 8");
+            } else
+            {
+                User user = new User { Username=username, Password=password};
+                context.Users.Add(user);
+                context.SaveChanges();
+                MessageBox.Show("Success!");
+                handleSignInClick(sender, e);
+            }
+
+
+        }
     }
 }
