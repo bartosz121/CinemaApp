@@ -109,7 +109,6 @@ namespace CinemaApp.Pages.AdminPages
             string title = txtTitle.Text;
 
             int year;
-            int time;
             MovieFormData data;
 
             try
