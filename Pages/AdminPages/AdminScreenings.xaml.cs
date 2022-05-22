@@ -64,10 +64,11 @@ namespace CinemaApp.Pages.AdminPages
                 context.SaveChanges();
 
                 populateScreeningsDataGrid();
+                showMessage("Screening added!");
 
-            } 
+            }
             catch (ArgumentException ex) {
-                MessageBox.Show(ex.Message);
+                showMessage(ex.Message);
             }
         }
 
@@ -85,9 +86,12 @@ namespace CinemaApp.Pages.AdminPages
                     context.SaveChanges();
 
                     populateScreeningsDataGrid();
-                } catch (ArgumentException ex)
+                    showMessage("Screening updated!");
+
+                }
+                catch (ArgumentException ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    showMessage(ex.Message);
                 }
             }
 
@@ -101,6 +105,8 @@ namespace CinemaApp.Pages.AdminPages
                 context.SaveChanges();
                 selectedScreening = null;
                 populateScreeningsDataGrid();
+
+                showMessage("Screening deleted!");
             }
         }
 
@@ -128,6 +134,14 @@ namespace CinemaApp.Pages.AdminPages
             }
         }
 
+        private void showMessage(string message)
+        {
+            if (MainSnackbar.MessageQueue is { } messageQueue)
+            {
+                Task.Factory.StartNew(() => messageQueue.Enqueue(message));
+            }
+        }
+
         private Screening getFormData()
         {
             try
@@ -145,5 +159,6 @@ namespace CinemaApp.Pages.AdminPages
                 throw new ArgumentException("Invalid data");
             }
         }
+
     }
 }

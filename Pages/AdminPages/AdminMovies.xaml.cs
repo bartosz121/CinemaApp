@@ -66,10 +66,13 @@ namespace CinemaApp.Pages.AdminPages
 
                 context.SaveChanges();
                 refreshDataGrid();
+
+                showMessage("Movie added!");
+
             }
             catch (ArgumentException ex)
             {
-                MessageBox.Show(ex.Message);
+                showMessage(ex.Message);
             }
         }
         private void btnClickUpdate(object sender, RoutedEventArgs e)
@@ -85,10 +88,12 @@ namespace CinemaApp.Pages.AdminPages
 
                     context.SaveChanges();
                     refreshDataGrid();
+
+                    showMessage("Movie updated!");
                 }
                 catch (ArgumentException ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    showMessage(ex.Message);
                 }
             }
         }
@@ -100,8 +105,18 @@ namespace CinemaApp.Pages.AdminPages
                 context.SaveChanges();
                 selectedMovie = null;
                 refreshDataGrid();
+
+                showMessage("Movie deleted!");
             }
 
+        }
+
+        private void showMessage(string message)
+        {
+            if (MainSnackbar.MessageQueue is { } messageQueue)
+            {
+                Task.Factory.StartNew(() => messageQueue.Enqueue(message));
+            }
         }
 
         private MovieFormData getFormData()

@@ -87,10 +87,12 @@ namespace CinemaApp.Pages.AdminPages
                 context.SaveChanges();
 
                 populateTicketsDataGrid();
+                showMessage("Ticket added!");
+
             }
             catch (ArgumentException ex)
             {
-                MessageBox.Show(ex.Message);
+                showMessage(ex.Message);
             }
 
         }
@@ -101,16 +103,18 @@ namespace CinemaApp.Pages.AdminPages
             {
                 try
                 {
-                Ticket ticket = getFormData();
-                selectedTicket.UserId = ticket.UserId;
-                selectedTicket.ScreeningId = ticket.ScreeningId;
-                context.SaveChanges();
+                    Ticket ticket = getFormData();
+                    selectedTicket.UserId = ticket.UserId;
+                    selectedTicket.ScreeningId = ticket.ScreeningId;
+                    context.SaveChanges();
 
-                populateTicketsDataGrid();
+                    populateTicketsDataGrid();
+
+                    showMessage("Ticket updated!");
                 }
                 catch (ArgumentException ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    showMessage(ex.Message);
                 }
 
             }
@@ -124,6 +128,15 @@ namespace CinemaApp.Pages.AdminPages
                 context.SaveChanges();
                 selectedTicket = null;
                 populateTicketsDataGrid();
+                showMessage("Ticket deleted!");
+            }
+        }
+
+        private void showMessage(string message)
+        {
+            if (MainSnackbar.MessageQueue is { } messageQueue)
+            {
+                Task.Factory.StartNew(() => messageQueue.Enqueue(message));
             }
         }
     }

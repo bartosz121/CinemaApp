@@ -17,13 +17,14 @@
         <StackPanel Grid.Column="0" Background="{DynamicResource MaterialDesignLightBackground}">
             <TextBlock HorizontalAlignment="Center" FontSize="26" FontWeight="SemiBold" Margin="0 30 0 10">Users</TextBlock>
             
-            <DataGrid x:Name="dataGrid" Margin="250 0 250 30" Height="270" SelectionChanged="dataGridSelectionChanged" AutoGenerateColumns="False" IsReadOnly="True" AreRowDetailsFrozen="True" CanUserReorderColumns="False" CanUserResizeColumns="False" HorizontalScrollBarVisibility="Hidden" SelectionMode="Extended">
+            <DataGrid x:Name="dataGrid" Margin="300 0 300 30" Height="270" SelectionChanged="dataGridSelectionChanged" AutoGenerateColumns="False" IsReadOnly="True" AreRowDetailsFrozen="True" CanUserReorderColumns="False" CanUserResizeColumns="False" HorizontalScrollBarVisibility="Hidden" SelectionMode="Extended">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Username" Binding="{Binding Username}"/>
+                    <DataGridTextColumn Header="Username" FontSize="20" Binding="{Binding Username}"/>
                 </DataGrid.Columns>
             </DataGrid>
 
-            <Button Click="btnClickDelete" Style="{StaticResource MaterialDesignFlatMidBgButton}" materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="250" materialDesign:ButtonAssist.CornerRadius="10" FontSize="18" Content="Delete" />
+            <Button Click="btnClickDelete" Margin="0 0 0 10" Style="{StaticResource MaterialDesignFlatMidBgButton}" materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="250" materialDesign:ButtonAssist.CornerRadius="10" FontSize="18" Content="Delete" />
+            <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="MainSnackbar" />
         </StackPanel>
     </Grid>
 </Page>

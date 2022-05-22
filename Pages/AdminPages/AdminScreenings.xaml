@@ -35,7 +35,7 @@
 
         <StackPanel Grid.Column="1" Background="{DynamicResource MaterialDesignLightBackground}">
             <TextBlock HorizontalAlignment="Center" FontSize="26" FontWeight="SemiBold" Margin="0 30 0 0">Screenings</TextBlock>
-            <StackPanel Margin="0 60 0 0">
+            <StackPanel Margin="0 60 0 10">
                 <ComboBox x:Name="movieComboBox" Width="300" materialDesign:HintAssist.Hint="Movie" FontSize="18">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -59,6 +59,7 @@
                   Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                 <TextBox Margin="0 20 0 0" x:Name="txtPrice" Width="300" FontSize="18" materialDesign:HintAssist.Hint="Price" BorderThickness="2" BorderBrush="{DynamicResource MaterialDesignDivider}" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
             </StackPanel>
+            <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="MainSnackbar" />
         </StackPanel>
     </Grid>
 </Page>

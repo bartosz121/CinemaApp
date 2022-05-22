@@ -34,7 +34,7 @@
 
         <StackPanel Grid.Column="1" Background="{DynamicResource MaterialDesignLightBackground}">
             <TextBlock HorizontalAlignment="Center" FontSize="26" FontWeight="SemiBold" Margin="0 30 0 0">Tickets</TextBlock>
-            <StackPanel Margin="0 100 0 0">
+            <StackPanel Margin="0 100 0 10">
                 <ComboBox x:Name="usersComboBox" Width="300" materialDesign:HintAssist.Hint="User" FontSize="18">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -53,6 +53,7 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </StackPanel>
+            <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="MainSnackbar" />
         </StackPanel>
     </Grid>
 </Page>

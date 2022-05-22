@@ -56,6 +56,12 @@ namespace CinemaApp.Pages.AdminPages
                 context.SaveChanges();
                 selectedUser = null;
 
+                if (MainSnackbar.MessageQueue is { } messageQueue)
+                {
+                    var message = "User deleted!";
+                    Task.Factory.StartNew(() => messageQueue.Enqueue(message));
+                }
+
                 populateUsersDataGrid();
             }
         }

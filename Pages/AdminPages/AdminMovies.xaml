@@ -32,10 +32,11 @@
 
         <StackPanel Grid.Column="1" Background="{DynamicResource MaterialDesignLightBackground}">
             <TextBlock HorizontalAlignment="Center" FontSize="26" FontWeight="SemiBold" Margin="0 30 0 0">Movies</TextBlock>
-                <StackPanel Margin="0 60 0 0">
-                <TextBox Margin="0 0 0 0" x:Name="txtTitle" Width="300" FontSize="18" materialDesign:HintAssist.Hint="Title" BorderThickness="2" BorderBrush="{DynamicResource MaterialDesignDivider}" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
-                <TextBox Margin="0 40 0 0" x:Name="txtYear" Width="300" FontSize="18" materialDesign:HintAssist.Hint="Year" BorderThickness="2" BorderBrush="{DynamicResource MaterialDesignDivider}" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
-            </StackPanel>
+                <StackPanel Margin="0 60 0 10">
+                    <TextBox Margin="0 0 0 0" x:Name="txtTitle" Width="300" FontSize="18" materialDesign:HintAssist.Hint="Title" BorderThickness="2" BorderBrush="{DynamicResource MaterialDesignDivider}" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                    <TextBox Margin="0 40 0 0" x:Name="txtYear" Width="300" FontSize="18" materialDesign:HintAssist.Hint="Year" BorderThickness="2" BorderBrush="{DynamicResource MaterialDesignDivider}" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                </StackPanel>
+            <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="MainSnackbar" />
         </StackPanel>
     </Grid>
 </Page>
