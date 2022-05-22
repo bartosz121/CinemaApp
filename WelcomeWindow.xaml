@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:CinemaApp"
         mc:Ignorable="d"
-        Title="CinemaApp" Height="450" Width="600"
+        Title="CinemaApp" Height="480" Width="600"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{x:Null}"
         AllowsTransparency="True"
@@ -22,7 +22,8 @@
                 <PasswordBox Margin="0 20 0 0" x:Name="txtPassword" Width="300" FontSize="18" materialDesign:HintAssist.Hint="Password" BorderThickness="2" BorderBrush="{DynamicResource MaterialDesignDivider}" Style="{StaticResource MaterialDesignOutlinedPasswordBox}"/>
 
                 <Button Margin="0 20 0 0" x:Name="signInBtn" Click="handleSignInClick" Style="{StaticResource MaterialDesignFlatMidBgButton}" materialDesign:ShadowAssist.ShadowDepth="Depth0" Height="53" Width="300" materialDesign:ButtonAssist.CornerRadius="10" FontSize="18" Content="Sign In"/>
-                <Button Margin="0 5 0 0" x:Name="signUpBtn" Click="handleSignUpClick" Style="{StaticResource MaterialDesignFlatButton}" materialDesign:ShadowAssist.ShadowDepth="Depth0" Height="53" Width="300" materialDesign:ButtonAssist.CornerRadius="10" FontSize="18" Content="Sign Up"/>
+                <Button Margin="0 5 0 10" x:Name="signUpBtn" Click="handleSignUpClick" Style="{StaticResource MaterialDesignFlatButton}" materialDesign:ShadowAssist.ShadowDepth="Depth0" Height="53" Width="300" materialDesign:ButtonAssist.CornerRadius="10" FontSize="18" Content="Sign Up"/>
+                <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="MainSnackbar" />
             </StackPanel>
         </materialDesign:DialogHost>
     </materialDesign:Card>

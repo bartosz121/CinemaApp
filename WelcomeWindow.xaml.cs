@@ -58,7 +58,7 @@ namespace CinemaApp
             }
             else
             {
-                MessageBox.Show("Invalid login credentials.");
+                showMessage("Invalid login credentials.");
             }
         }
 
@@ -69,7 +69,7 @@ namespace CinemaApp
 
             if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
             {
-                MessageBox.Show("Invalid data");
+                showMessage("Invalid data");
                 return;
             }
 
@@ -77,23 +77,29 @@ namespace CinemaApp
 
             if (usernameExists)
             {
-                MessageBox.Show("User with this username already exists.");
+                showMessage("User with this username already exists.");
                 return;
             }
 
             if (password.Length < 8)
             {
-                MessageBox.Show("Password length must be > 8");
+                showMessage("Password length must be > 8");
             } else
             {
                 User user = new User { Username=username, Password=password};
                 context.Users.Add(user);
                 context.SaveChanges();
-                MessageBox.Show("Success!");
+                showMessage("Success!");
                 handleSignInClick(sender, e);
             }
+        }
 
-
+        private void showMessage(string message)
+        {
+            if (MainSnackbar.MessageQueue is { } messageQueue)
+            {
+                Task.Factory.StartNew(() => messageQueue.Enqueue(message));
+            }
         }
     }
 }
