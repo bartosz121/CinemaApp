@@ -35,7 +35,11 @@
 
         <StackPanel Grid.Column="1" Background="{DynamicResource MaterialDesignLightBackground}">
             <TextBlock HorizontalAlignment="Center" FontSize="26" FontWeight="SemiBold" Margin="0 30 0 0">Screenings</TextBlock>
-            <StackPanel Margin="0 60 0 10">
+            <CheckBox x:Name="filterBtn" Click="filterBtnClicked" HorizontalAlignment="Center"
+                    IsChecked="True"
+                    Margin="0 0 0 10"
+                    Content="Show upcoming screenings only" FontSize="16" />
+            <StackPanel Margin="0 40 0 10">
                 <ComboBox x:Name="movieComboBox" Width="300" materialDesign:HintAssist.Hint="Movie" FontSize="18">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>

@@ -38,14 +38,19 @@ namespace CinemaApp.Pages.AdminPages
 
             movieComboBox.ItemsSource = moviesComboBoxList;
             roomComboBox.ItemsSource = roomsComboBoxList;
-            populateScreeningsDataGrid();
+            populateScreeningsDataGrid(getCheckboxValue());
         }
 
-        private void populateScreeningsDataGrid()
+        private void populateScreeningsDataGrid(bool showPast)
         {
             List<ScreeningDataGrid> screeningDataGrid = new List<ScreeningDataGrid>();
 
-            context.Screenings.Include(s => s.Movie).Include(s => s.Tickets).Include(s => s.Room).ToList().ForEach(s =>
+            context.Screenings
+                .Where(t => showPast ? t.Date >= DateTime.Now : true)
+                .Include(s => s.Movie)
+                .Include(s => s.Tickets)
+                .Include(s => s.Room)
+                .ToList().ForEach(s =>
             {
                 int screeningBoughtTickets = context.Tickets.Where(t => t.ScreeningId == s.Id).Count();
                 int ticketsLeft = s.Room.Capacity - screeningBoughtTickets;
@@ -63,7 +68,7 @@ namespace CinemaApp.Pages.AdminPages
                 context.Screenings.Add(screening);
                 context.SaveChanges();
 
-                populateScreeningsDataGrid();
+                populateScreeningsDataGrid(getCheckboxValue());
                 showMessage("Screening added!");
 
             }
@@ -85,7 +90,7 @@ namespace CinemaApp.Pages.AdminPages
                     selectedScreening.Price = data.Price;
                     context.SaveChanges();
 
-                    populateScreeningsDataGrid();
+                    populateScreeningsDataGrid(getCheckboxValue());
                     showMessage("Screening updated!");
 
                 }
@@ -104,7 +109,7 @@ namespace CinemaApp.Pages.AdminPages
                 context.Screenings.Remove(selectedScreening);
                 context.SaveChanges();
                 selectedScreening = null;
-                populateScreeningsDataGrid();
+                populateScreeningsDataGrid(getCheckboxValue());
 
                 showMessage("Screening deleted!");
             }
@@ -158,6 +163,22 @@ namespace CinemaApp.Pages.AdminPages
             {
                 throw new ArgumentException("Invalid data");
             }
+        }
+
+        private void filterBtnClicked(object sender, RoutedEventArgs e)
+        {
+            populateScreeningsDataGrid(getCheckboxValue());
+        }
+
+        private bool getCheckboxValue()
+        {
+            var val = filterBtn.IsChecked;
+
+            if (val == true)
+            {
+                return true;
+            }
+            return false;
         }
 
     }
