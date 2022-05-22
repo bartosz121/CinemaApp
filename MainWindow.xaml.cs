@@ -28,7 +28,7 @@ namespace CinemaApp
             InitializeComponent();
             this.context = new dbContext();
             this.user = user;
-            //MainFrame.Content = new SignInPage(context);
+            MainFrame.Content = new UserScreenings(this.user);
         }
 
         private void exitApp(object sender, RoutedEventArgs e)
@@ -36,9 +36,15 @@ namespace CinemaApp
             Application.Current.Shutdown();
         }
 
-        private void btn1Click(object sender, RoutedEventArgs e)
+        private void screeningsBtnClick(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new Page1();
+            MainFrame.Content = new UserScreenings(user);
+            this.MenuToggleButton.IsChecked = false;
+        }
+
+        private void ticketsBtnClick(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new UserTickets(user);
             this.MenuToggleButton.IsChecked = false;
         }
     }

@@ -21,9 +21,8 @@
                                     HorizontalAlignment="Right" Margin="16"
                                     IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" />
                 <ListBox>
-                    <Button Click="btn1Click" Style="{StaticResource MaterialDesignFlatMidBgButton}" materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="250" materialDesign:ButtonAssist.CornerRadius="10" FontSize="18" Content="Movies"/>
-                    <Button Style="{StaticResource MaterialDesignFlatMidBgButton}" materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="250" materialDesign:ButtonAssist.CornerRadius="10" FontSize="18" Content="Screenings"/>
-                    <Button Style="{StaticResource MaterialDesignFlatMidBgButton}" materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="250" materialDesign:ButtonAssist.CornerRadius="10" FontSize="18" Content="My Tickets"/>
+                    <Button Click="screeningsBtnClick" Style="{StaticResource MaterialDesignFlatMidBgButton}" materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="250" materialDesign:ButtonAssist.CornerRadius="10" FontSize="18" Content="Screenings"/>
+                    <Button Click="ticketsBtnClick" Style="{StaticResource MaterialDesignFlatMidBgButton}" materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="250" materialDesign:ButtonAssist.CornerRadius="10" FontSize="18" Content="My Tickets"/>
                 </ListBox>
             </DockPanel>
         </materialDesign:DrawerHost.LeftDrawerContent>
@@ -43,8 +42,6 @@
                 </Grid.RowDefinitions>
 
                 <Frame x:Name="MainFrame" Background="{DynamicResource MaterialDesignLightBackground}" Grid.Row="1" NavigationUIVisibility="Hidden" />
-                <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="MainSnackbar"
-                                            Grid.Row="1" />
             </Grid>
         </DockPanel>
     </materialDesign:DrawerHost>
