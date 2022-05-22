@@ -40,9 +40,9 @@ namespace CinemaApp.Pages.UserPages
         {
             dataGrid.ItemsSource = context.Tickets
                 .Where(t => t.UserId == this.user.Id)
-                .Where(t => showPast ? t.Screening.Date >= DateTime.Now : true )
                 .Include(t => t.Screening.Movie)
-                .Include(t => t.Screening.Room).ToList();
+                .Include(t => t.Screening.Room)
+                .Where(t => showPast ? t.Screening.Date >= DateTime.Now : true).ToList();
         }
 
         private void dataGridSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -51,23 +51,32 @@ namespace CinemaApp.Pages.UserPages
             var ticket = (Ticket)item.SelectedItem;
 
             selectedTicket = ticket;
+            btnRefund.IsEnabled = true;
+
+            if (selectedTicket != null)
+            {
+                if (selectedTicket.Screening.Date < DateTime.Now)
+                {
+                    btnRefund.IsEnabled = false;
+                }
+            }
         }
 
         private void btnClickRefund(object sender, RoutedEventArgs e)
         {
             if (selectedTicket != null)
             {
-                if (selectedTicket.Screening.Date < DateTime.Now)
+                context.Tickets.Remove(selectedTicket);
+                context.SaveChanges();
+                populateTicketsDataGrid(getCheckboxValue());
+                selectedTicket = null;
+
+                if (MainSnackbar.MessageQueue is { } messageQueue)
                 {
-                    MessageBox.Show("Cant refund tickets from the past!");
+                    var message = "Ticket refunded!";
+                    Task.Factory.StartNew(() => messageQueue.Enqueue(message));
                 }
-                else
-                {
-                    context.Tickets.Remove(selectedTicket);
-                    context.SaveChanges();
-                    selectedTicket = null;
-                    populateTicketsDataGrid(getCheckboxValue());
-                }
+
             }
         }
 
